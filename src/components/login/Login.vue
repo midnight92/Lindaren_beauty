@@ -3,6 +3,8 @@
     <div id="login-container">
       <div id="login-box">
         <div class="form-header">
+          <div class="form-header-title">Welcome</div>
+          <div class="form-header-content">Lindaren</div>
         </div>
 
         <!-- 登录 -->
@@ -14,7 +16,13 @@
           </div>
           <div class="form-item">
             <div class="input-text">密码</div>
-            <input id="password" class="input-item" v-model="loginPassword" type="password" placeholder="Password">
+            <input
+              id="password"
+              class="input-item"
+              v-model="loginPassword"
+              type="password"
+              placeholder="Password"
+            >
             <div class="error-msg"></div>
           </div>
           <el-button class="btn-form" @click="login" type="primary">登&nbsp;&nbsp;录</el-button>
@@ -29,7 +37,13 @@
           </div>
           <div class="form-item">
             <div class="input-text">密码</div>
-            <input id="password" class="input-item" v-model="registerPassword" type="password" placeholder="Password">
+            <input
+              id="password"
+              class="input-item"
+              v-model="registerPassword"
+              type="password"
+              placeholder="Password"
+            >
             <div class="error-msg"></div>
           </div>
           <div class="form-item">
@@ -53,7 +67,7 @@
 </template>
 
 <script>
-import http from "@/common/http"
+import http from "@/common/http";
 
 export default {
   name: "HelloWorld",
@@ -95,7 +109,7 @@ export default {
           console.log("res: ", data);
         })
         .catch(err => console.log(err));
-    },
+    }
   }
 };
 </script>
@@ -135,10 +149,9 @@ export default {
   border: 0;
   outline: none;
   font-size: 16px;
-  border-bottom: solid 1px #409EFF;
+  border-bottom: solid 1px #409eff;
   width: 100%;
   height: 40px;
-  
 }
 .form-item {
   margin: 15px 0px;
@@ -146,6 +159,8 @@ export default {
 #login-box .form-header {
   padding-top: 30px;
   height: 130px;
+  color: #409eff;
+  text-align: left;
 }
 .error-msg {
   height: 20px;
@@ -162,5 +177,11 @@ export default {
 #btn-switch {
   height: 36px;
   line-height: 0;
+}
+.form-header-title {
+  font-size: 30px;
+}
+.form-header-content {
+  font-size: 80px;
 }
 </style>
