@@ -3,7 +3,6 @@
     <div id="login-container">
       <div id="login-box">
         <div class="form-header">
-          
         </div>
 
         <!-- 登录 -->
@@ -18,27 +17,27 @@
             <input id="password" class="input-item" v-model="loginPassword" type="password" placeholder="Password">
             <div class="error-msg"></div>
           </div>
-          <el-button class="btn-form" type="primary">登&nbsp;&nbsp;录</el-button>
+          <el-button class="btn-form" @click="login" type="primary">登&nbsp;&nbsp;录</el-button>
         </div>
 
         <!-- 注册 -->
         <div v-show="isShowRegister" id="register-form" class="form-item-container">
           <div class="form-item">
             <div class="input-text">邮箱</div>
-            <input id="email" class="input-item" placeholder="Email">
+            <input id="email" class="input-item" v-model="registerEmail" placeholder="Email">
             <div class="error-msg"></div>
           </div>
           <div class="form-item">
             <div class="input-text">密码</div>
-            <input id="password" class="input-item" type="password" placeholder="Password">
+            <input id="password" class="input-item" v-model="registerPassword" type="password" placeholder="Password">
             <div class="error-msg"></div>
           </div>
           <div class="form-item">
             <div class="input-text">昵称</div>
-            <input id="nickName" class="input-item" placeholder="nickName">
+            <input id="nickName" class="input-item" v-model="userNickname" placeholder="nickName">
             <div class="error-msg"></div>
           </div>
-          <el-button class="btn-form" type="primary">注&nbsp;&nbsp;册</el-button>
+          <el-button class="btn-form" @click="register" type="primary">注&nbsp;&nbsp;册</el-button>
         </div>
       </div>
       <div id="switch-box">
@@ -54,6 +53,8 @@
 </template>
 
 <script>
+import http from "@/common/http"
+
 export default {
   name: "HelloWorld",
   data() {
@@ -103,6 +104,7 @@ export default {
 #main-container {
   text-align: center;
   height: 100vh;
+  min-height: 700px;
   background-image: url("../../assets/sign_bg.db29b0fb.png");
   background-repeat: no-repeat;
   background-color: #b8e5f8;
