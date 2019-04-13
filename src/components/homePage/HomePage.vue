@@ -1,7 +1,54 @@
 <template>
-  <el-container>
-    <el-main class="main-container">
-      homeapage
+  <el-container class="main-container">
+    <el-menu
+      default-active="1-4-1"
+      class="el-menu-vertical"
+      @open="handleOpen"
+      @close="handleClose"
+      :collapse="isCollapse"
+    >
+      <el-submenu index="1">
+        
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span slot="title">导航一</span>
+        </template>
+
+        <el-menu-item-group>
+          <span slot="title">分组一</span>
+          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="1-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="1-3">选项3</el-menu-item>
+        </el-menu-item-group>
+        <el-submenu index="1-4">
+          <span slot="title">选项4</span>
+          <el-menu-item index="1-4-1">选项1</el-menu-item>
+        </el-submenu>
+      </el-submenu>
+
+      <el-menu-item index="2">
+        <i class="el-icon-menu"></i>
+        <span slot="title">导航二</span>
+      </el-menu-item>
+      
+      <el-menu-item index="3" disabled>
+        <i class="el-icon-document"></i>
+        <span slot="title">导航三</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span slot="title">导航四</span>
+      </el-menu-item>
+    </el-menu>
+
+    <!-- 主内容 -->
+    <el-main id="content">
+      <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+        <el-radio-button :label="false">展开</el-radio-button>
+        <el-radio-button :label="true">收起</el-radio-button>
+      </el-radio-group>
     </el-main>
   </el-container>
 </template>
@@ -13,17 +60,15 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
-      isShowSuccess: false,
-      isShowFail: false
+      isCollapse: true
     };
   },
   methods: {
-    goToHomePage() {
-      alert(123);
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
     },
-    goToRegister() {
-      alert(123);
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
     },
     unfreeze() {
       let token = this.getQueryVariable("token");
@@ -42,24 +87,6 @@ export default {
           console.log(err);
           this.msg = err.errorMsg;
         });
-    },
-    getQueryVariable(variable) {
-      let name, value;
-      let str = location.href; //取得整个地址栏
-      let num = str.indexOf("?");
-      str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
-
-      let arr = str.split("&"); //各个参数放到数组里
-      for (let i = 0; i < arr.length; i++) {
-        num = arr[i].indexOf("=");
-        if (num > 0) {
-          name = arr[i].substring(0, num);
-          if (name === variable) {
-            return arr[i].substr(num + 1);
-          }
-        }
-      }
-      return null;
     }
   }
 };
@@ -67,10 +94,9 @@ export default {
 
 <style scoped>
 .main-container {
-  height: 100vh;
-  background-image: url("../../assets/sign_bg.db29b0fb.png");
-  background-repeat: no-repeat;
-  background-color: #b8e5f8;
+  height: 100%;
+  width: 100%;
+  min-height: 1000px;
 }
 .unfreeze-content {
   height: 400px;
@@ -78,4 +104,23 @@ export default {
   background-color: #ffffff;
   border-radius: 2px;
 }
+#content {
+  background-color: #f6f6f6;
+}
+#header-container {
+  height: 300px;
+  background-color: red;
+}
+#header-container {
+  background-color: gold;
+  height: 250px;
+  margin-top: 50px;
+}
+.el-menu-vertical:not(.el-menu--collapse) {
+  width: 300px;
+  height: 100%;
+  text-align: left;
+  padding-left: 20px;
+}
+
 </style>

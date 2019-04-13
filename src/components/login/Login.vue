@@ -122,7 +122,7 @@ export default {
   background-image: url("../../assets/sign_bg.db29b0fb.png");
   background-repeat: no-repeat;
   background-color: #b8e5f8;
-  background-size: cover;
+  background-size: cover;   /*把背景图片放大到适合元素容器的尺寸，图片比例不变。*/
   width: 100%;
 }
 #login-container {
