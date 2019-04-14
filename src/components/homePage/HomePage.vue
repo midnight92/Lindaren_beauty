@@ -1,5 +1,7 @@
 <template>
   <el-container class="main-container">
+
+    <!-- 侧边菜单 -->
     <el-menu
       default-active="1-4-1"
       class="el-menu-vertical"
@@ -8,7 +10,6 @@
       :collapse="isCollapse"
     >
       <el-submenu index="1">
-        
         <template slot="title">
           <i class="el-icon-location"></i>
           <span slot="title">导航一</span>
@@ -22,6 +23,7 @@
         <el-menu-item-group title="分组2">
           <el-menu-item index="1-3">选项3</el-menu-item>
         </el-menu-item-group>
+
         <el-submenu index="1-4">
           <span slot="title">选项4</span>
           <el-menu-item index="1-4-1">选项1</el-menu-item>
@@ -32,7 +34,7 @@
         <i class="el-icon-menu"></i>
         <span slot="title">导航二</span>
       </el-menu-item>
-      
+
       <el-menu-item index="3" disabled>
         <i class="el-icon-document"></i>
         <span slot="title">导航三</span>
@@ -42,13 +44,20 @@
         <span slot="title">导航四</span>
       </el-menu-item>
     </el-menu>
+    <!-- 切换按钮 -->
+    <el-button type="primary" id="switchBtn" @click="switchMenu" icon="el-icon-search" circle></el-button>
 
     <!-- 主内容 -->
     <el-main id="content">
-      <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-        <el-radio-button :label="false">展开</el-radio-button>
-        <el-radio-button :label="true">收起</el-radio-button>
-      </el-radio-group>
+      <!-- 博客展示区 -->
+      <el-container id="blog-show_content">
+          <div v-html="blogContent"></div>
+      </el-container>
+
+      <!-- 博客编辑区 -->
+      <el-container id="blog-show_content">
+
+      </el-container>
     </el-main>
   </el-container>
 </template>
@@ -60,10 +69,14 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      isCollapse: true
+      isCollapse: true,
+      blogContent: "<span style='color: red'>哈哈哈</span>"
     };
   },
   methods: {
+    switchMenu() {
+      this.isCollapse = !this.isCollapse;
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -97,6 +110,7 @@ export default {
   height: 100%;
   width: 100%;
   min-height: 1000px;
+  position: absolute;
 }
 .unfreeze-content {
   height: 400px;
@@ -122,5 +136,9 @@ export default {
   text-align: left;
   padding-left: 20px;
 }
-
+#switchBtn {
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+}
 </style>
