@@ -1,6 +1,5 @@
 <template>
   <el-container class="main-container">
-
     <!-- 侧边菜单 -->
     <el-menu
       default-active="1-4-1"
@@ -51,26 +50,36 @@
     <el-main id="content">
       <!-- 博客展示区 -->
       <el-container id="blog-show_content">
-          <div v-html="blogContent"></div>
+        <div v-html="blogContent"></div>
       </el-container>
 
       <!-- 博客编辑区 -->
       <el-container id="blog-show_content">
-
+        <div>
+          <div class="info">UE编辑器示例</div>
+          <el-button @click="getUEContent()">获取内容</el-button>
+          <div class="editor-container">
+            <ueditor :defaultMsg="defaultMsg" :config="config" ref="ue"></ueditor>
+          </div>
+        </div>
       </el-container>
     </el-main>
   </el-container>
 </template>
 
 <script>
-import http from "@/common/http";
+import ueditor from "@/components/ue.vue";
 
 export default {
-  name: "HelloWorld",
   data() {
     return {
       isCollapse: true,
-      blogContent: "<span style='color: red'>哈哈哈</span>"
+      blogContent: "",
+      defaultMsg: "这里是UE测试",
+      config: {
+        initialFrameWidth: null,
+        initialFrameHeight: 350
+      }
     };
   },
   methods: {
@@ -83,24 +92,19 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    unfreeze() {
-      let token = this.getQueryVariable("token");
-      http
-        .get("http://localhost/api/user/unfreeze?token=" + token)
-        .then(data => {
-          console.log("res: ", data);
-          if (data.success) {
-            this.isShowSuccess = true;
-          } else {
-            this.isShowFail = true;
-          }
-          this.msg = data.errorMsg;
-        })
-        .catch(err => {
-          console.log(err);
-          this.msg = err.errorMsg;
-        });
+    getUEContent() {
+      let content = this.$refs.ue.getUEContent();
+      this.$notify({
+        title: "获取成功，可在控制台查看！",
+        message: content,
+        type: "success"
+      });
+      this.blogContent = content;
+      console.log(content);
     }
+  },
+  components: {
+    ueditor
   }
 };
 </script>
