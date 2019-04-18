@@ -56,11 +56,16 @@
       <!-- 博客编辑区 -->
       <el-container id="blog-show_content">
         <div>
-          <div class="info">UE编辑器示例</div>
-          <el-button @click="getUEContent()">获取内容</el-button>
-          <div class="editor-container">
-            <ueditor :defaultMsg="defaultMsg" :config="config" ref="ue"></ueditor>
-          </div>
+          <quill-editor
+            v-model="content"
+            ref="myQuillEditor"
+            :options="editorOption"
+            @blur="onEditorBlur($event)"
+            @focus="onEditorFocus($event)"
+            @change="onEditorChange($event)"
+          ></quill-editor>
+
+          <div v-html="str" class="ql-editor">{{str}}</div>
         </div>
       </el-container>
     </el-main>
@@ -68,18 +73,19 @@
 </template>
 
 <script>
-import ueditor from "@/components/ue.vue";
+import { quillEditor } from "vue-quill-editor"; //调用编辑器
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 
 export default {
   data() {
     return {
       isCollapse: true,
       blogContent: "",
-      defaultMsg: "这里是UE测试",
-      config: {
-        initialFrameWidth: null,
-        initialFrameHeight: 350
-      }
+      str: "",
+      editorOption: {},
+      content: "<p>example content</p>"
     };
   },
   methods: {
@@ -92,19 +98,30 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    getUEContent() {
-      let content = this.$refs.ue.getUEContent();
-      this.$notify({
-        title: "获取成功，可在控制台查看！",
-        message: content,
-        type: "success"
-      });
-      this.blogContent = content;
-      console.log(content);
+    onEditorReady(editor) {
+      // 准备编辑器
+    },
+    onEditorBlur() {}, // 失去焦点事件
+    onEditorFocus() {}, // 获得焦点事件
+    onEditorChange() {}, // 内容改变事件
+    escapeStringHTML(str) {
+      str = str.replace(/&lt;/g, "<");
+      str = str.replace(/&gt;/g, ">");
+      return str;
     }
   },
   components: {
-    ueditor
+    quillEditor
+  },
+  computed: {
+    editor() {
+      return this.$refs.myQuillEditor.quill;
+    }
+  },
+  mounted() {
+    let content = ""; // 请求后台返回的内容字符串
+    this.str = this.escapeStringHTML(content);
+    console.log(12321);
   }
 };
 </script>
