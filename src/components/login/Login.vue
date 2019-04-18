@@ -106,6 +106,11 @@ export default {
           userNickname: this.userNickname
         })
         .then(data => {
+          let msg = this.userNickname + " 注册成功，请登录您的邮箱进行激活。";
+          this.$alert(msg, "注册成功", {
+            confirmButtonText: "确定",
+            callback: action => {}
+          });
           console.log("res: ", data);
         })
         .catch(err => console.log(err));
@@ -122,7 +127,7 @@ export default {
   background-image: url("../../assets/sign_bg.db29b0fb.png");
   background-repeat: no-repeat;
   background-color: #b8e5f8;
-  background-size: cover;   /*把背景图片放大到适合元素容器的尺寸，图片比例不变。*/
+  background-size: cover; /*把背景图片放大到适合元素容器的尺寸，图片比例不变。*/
   width: 100%;
 }
 #login-container {
