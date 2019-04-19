@@ -58,14 +58,11 @@
         <div>
           <quill-editor
             v-model="content"
-            ref="myQuillEditor"
             :options="editorOption"
             @blur="onEditorBlur($event)"
             @focus="onEditorFocus($event)"
             @change="onEditorChange($event)"
           ></quill-editor>
-
-          <div v-html="str" class="ql-editor">{{str}}</div>
         </div>
       </el-container>
     </el-main>
@@ -73,19 +70,60 @@
 </template>
 
 <script>
-import { quillEditor } from "vue-quill-editor"; //调用编辑器
+import { quillEditor } from "vue-quill-editor";
+import * as Quill from "quill"; //引入编辑器
+
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
+import "@/assets/css/font.css";
+
+var fonts = [
+  "SimSun",
+  "SimHei",
+  "Microsoft-YaHei",
+  "KaiTi",
+  "FangSong",
+  "Arial",
+  "Times-New-Roman",
+  "sans-serif"
+];
+var Font = Quill.import("formats/font");
+Font.whitelist = fonts; //将字体加入到白名单
+Quill.register(Font, true);
 
 export default {
   data() {
     return {
       isCollapse: true,
       blogContent: "",
-      str: "",
-      editorOption: {},
-      content: "<p>example content</p>"
+      content: "",
+      editorOption: {
+        modules: {
+          toolbar: [
+            ["bold", "italic", "underline", "strike"],
+            ["blockquote", "code-block"],
+
+            [{ header: 1 }, { header: 2 }],
+            [{ list: "ordered" }, { list: "bullet" }],
+            [{ script: "sub" }, { script: "super" }],
+            [{ indent: "-1" }, { indent: "+1" }],
+            [{ direction: "rtl" }],
+
+            [{ size: ["small", false, "large", "huge"] }],
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ color: [] }, { background: [] }],
+            [{ font: fonts }], //把上面定义的字体数组放进来
+
+            [{ align: [] }],
+
+            ["clean"],
+            ["image", "video"]
+          ]
+        },
+        theme: "snow"
+      }
     };
   },
   methods: {
@@ -98,35 +136,25 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    onEditorReady(editor) {
-      // 准备编辑器
+    onEditorBlur(editor) {
+      //失去焦点事件
     },
-    onEditorBlur() {}, // 失去焦点事件
-    onEditorFocus() {}, // 获得焦点事件
-    onEditorChange() {}, // 内容改变事件
-    escapeStringHTML(str) {
-      str = str.replace(/&lt;/g, "<");
-      str = str.replace(/&gt;/g, ">");
-      return str;
+    onEditorFocus(editor) {
+      //获得焦点事件
+    },
+    onEditorChange({ editor, html, text }) {
+      //编辑器文本发生变化
+      //this.content可以实时获取到当前编辑器内的文本内容
+      console.log(this.content);
     }
-  },
-  components: {
-    quillEditor
-  },
-  computed: {
-    editor() {
-      return this.$refs.myQuillEditor.quill;
-    }
-  },
-  mounted() {
-    let content = ""; // 请求后台返回的内容字符串
-    this.str = this.escapeStringHTML(content);
-    console.log(12321);
   }
 };
 </script>
 
 <style scoped>
+.quill-editor {
+  height: 350px;
+}
 .main-container {
   height: 100%;
   width: 100%;
