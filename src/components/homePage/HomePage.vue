@@ -50,7 +50,7 @@
     <el-main id="content">
       <!-- 博客展示区 -->
       <el-container id="blog-show_content">
-        <div v-html="blogContent"></div>
+        <div v-html="content"></div>
       </el-container>
 
       <!-- 博客编辑区 -->
@@ -70,15 +70,17 @@
 </template>
 
 <script>
-import { quillEditor } from "vue-quill-editor";
-import * as Quill from "quill"; //引入编辑器
-
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import "@/assets/css/font.css";
 
-var fonts = [
+import * as Quill from "quill"; //引入编辑器
+import { quillEditor } from "vue-quill-editor";
+import { ImageDrop } from "quill-image-drop-module"; //quill图片可拖拽上传
+// import ImageResize from "quill-image-resize-module"; //quill图片可拖拽改变大小
+
+const fonts = [
   "SimSun",
   "SimHei",
   "Microsoft-YaHei",
@@ -88,9 +90,11 @@ var fonts = [
   "Times-New-Roman",
   "sans-serif"
 ];
-var Font = Quill.import("formats/font");
+const Font = Quill.import("formats/font");
 Font.whitelist = fonts; //将字体加入到白名单
 Quill.register(Font, true);
+Quill.register("modules/imageDrop", ImageDrop);
+// Quill.register("modules/imageResize", ImageResize);
 
 export default {
   data() {
@@ -100,6 +104,8 @@ export default {
       content: "",
       editorOption: {
         modules: {
+          imageDrop: true,
+          // imageResize: {},
           toolbar: [
             ["bold", "italic", "underline", "strike"],
             ["blockquote", "code-block"],
