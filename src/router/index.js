@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/login/Login'
 import Unfreeze from '@/components/unfreeze/Unfreeze'
 import HomePage from '@/components/homePage/HomePage'
+import CreateBlog from '@/components/homePage/CreateBlog'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/homePage',
       name: 'HomePage',
       component: HomePage
+    },
+    {
+      path: '/createBlog',
+      name: 'CreateBlog',
+      component: CreateBlog
     }
   ]
 })

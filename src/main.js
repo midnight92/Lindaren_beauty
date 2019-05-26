@@ -7,6 +7,10 @@ import router from './router'
 import VueQuillEditor from 'vue-quill-editor'
 Vue.use(VueQuillEditor)
 
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+Vue.use(mavonEditor)
+
 //Element-UI
 import {
   Pagination,
