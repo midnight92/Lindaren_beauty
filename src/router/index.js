@@ -4,7 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/login/Login'
 import Unfreeze from '@/components/unfreeze/Unfreeze'
 import HomePage from '@/components/homePage/HomePage'
-import CreateBlog from '@/components/homePage/CreateBlog'
+import EditBlog from '@/components/detail/EditBlog'
+import ShowBlog from '@/components/detail/ShowBlog'
 
 Vue.use(Router)
 
@@ -31,9 +32,15 @@ export default new Router({
       component: HomePage
     },
     {
-      path: '/createBlog',
-      name: 'CreateBlog',
-      component: CreateBlog
+      path: '/editBlog',
+      name: 'EditBlog',
+      component: EditBlog
+    }
+    ,
+    {
+      path: '/showBlog',
+      name: 'ShowBlog',
+      component: ShowBlog
     }
   ]
 })

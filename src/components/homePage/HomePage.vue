@@ -48,88 +48,16 @@
 
     <!-- 主内容 -->
     <el-main id="content">
-      <!-- 博客展示区 -->
-      <el-container id="blog-show_content">
-        <div v-html="content"></div>
-      </el-container>
-
-      <!-- 博客编辑区 -->
-      <el-container id="blog-show_content">
-        <div>
-          <quill-editor
-            v-model="content"
-            :options="editorOption"
-            @blur="onEditorBlur($event)"
-            @focus="onEditorFocus($event)"
-            @change="onEditorChange($event)"
-          ></quill-editor>
-        </div>
-      </el-container>
+      
     </el-main>
   </el-container>
 </template>
 
 <script>
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.snow.css";
-import "quill/dist/quill.bubble.css";
-import "@/assets/css/font.css";
-
-import * as Quill from "quill"; //引入编辑器
-import { quillEditor } from "vue-quill-editor";
-import { ImageDrop } from "quill-image-drop-module"; //quill图片可拖拽上传
-// import ImageResize from "quill-image-resize-module"; //quill图片可拖拽改变大小
-
-const fonts = [
-  "SimSun",
-  "SimHei",
-  "Microsoft-YaHei",
-  "KaiTi",
-  "FangSong",
-  "Arial",
-  "Times-New-Roman",
-  "sans-serif"
-];
-const Font = Quill.import("formats/font");
-Font.whitelist = fonts; //将字体加入到白名单
-Quill.register(Font, true);
-Quill.register("modules/imageDrop", ImageDrop);
-// Quill.register("modules/imageResize", ImageResize);
-
 export default {
   data() {
     return {
-      isCollapse: true,
-      blogContent: "",
-      content: "",
-      editorOption: {
-        modules: {
-          imageDrop: true,
-          // imageResize: {},
-          toolbar: [
-            ["bold", "italic", "underline", "strike"],
-            ["blockquote", "code-block"],
-
-            [{ header: 1 }, { header: 2 }],
-            [{ list: "ordered" }, { list: "bullet" }],
-            [{ script: "sub" }, { script: "super" }],
-            [{ indent: "-1" }, { indent: "+1" }],
-            [{ direction: "rtl" }],
-
-            [{ size: ["small", false, "large", "huge"] }],
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-            [{ color: [] }, { background: [] }],
-            [{ font: fonts }], //把上面定义的字体数组放进来
-
-            [{ align: [] }],
-
-            ["clean"],
-            ["image", "video"]
-          ]
-        },
-        theme: "snow"
-      }
+      isCollapse: true
     };
   },
   methods: {
@@ -141,26 +69,12 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
-    },
-    onEditorBlur(editor) {
-      //失去焦点事件
-    },
-    onEditorFocus(editor) {
-      //获得焦点事件
-    },
-    onEditorChange({ editor, html, text }) {
-      //编辑器文本发生变化
-      //this.content可以实时获取到当前编辑器内的文本内容
-      console.log(this.content);
     }
   }
 };
 </script>
 
 <style scoped>
-.quill-editor {
-  height: 350px;
-}
 .main-container {
   height: 100%;
   width: 100%;
