@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/login/Login'
 import Unfreeze from '@/components/unfreeze/Unfreeze'
 import HomePage from '@/components/homePage/HomePage'
+import HomePage2 from '@/components/homePage/HomePage2'
 import EditBlog from '@/components/detail/EditBlog'
 import ShowBlog from '@/components/detail/ShowBlog'
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/homePage',
       name: 'HomePage',
       component: HomePage
+    },
+    {
+      path: '/homePage2',
+      name: 'HomePage2',
+      component: HomePage2
     },
     {
       path: '/editBlog',
