@@ -41,8 +41,7 @@ export default new Router({
       path: '/editBlog',
       name: 'EditBlog',
       component: EditBlog
-    }
-    ,
+    },
     {
       path: '/showBlog',
       name: 'ShowBlog',
