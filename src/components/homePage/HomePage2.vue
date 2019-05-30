@@ -52,7 +52,40 @@
         <el-row class="main-content" :gutter="0">
           <!-- 左 -->
           <el-col :span="16">
-            <div class="content-col left-content"></div>
+            <div class="content-col left-content">
+              <div class="left-content-item">
+                <div class="left-content-item-container">
+                  <div class="left-content-item-title">Spring Boot 面试，一个问题就干趴下了！</div>
+                  <div
+                    class="left-content-item-content"
+                  >最近栈长面试了不少人，其中不乏说对 Spring Boot 非常熟悉的，然后当我问到一些 Spring Boot 核心功能和原理的时候，没人能说...</div>
+                  <div class="left-content-item-footer">
+                    <span class="footer-item tag">Java技术栈</span>
+                    <span class="footer-item comment-count">6</span>
+                    <span class="footer-item nice-count">10</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="left-content-item">
+                <div style="width:450px;" class="left-content-item-container">
+                  <div class="left-content-item-title">Spring Boot 面试，一个问题就干趴下了！</div>
+                  <div
+                    class="left-content-item-content"
+                  >最近栈长面试了不少人，其中不乏说对 Spring Boot 非常熟悉的，然后当我问到一些 Spring Boot 核心功能和原理的时候，没人能说...</div>
+                  <div class="left-content-item-footer">
+                    <span class="footer-item tag">Java技术栈</span>
+                    <span class="footer-item comment-count">6</span>
+                    <span class="footer-item nice-count">10</span>
+                  </div>
+                </div>
+                <div class="left-content-item-img">
+                  <img src="../../assets/images/1.jpg">
+                </div>
+              </div>
+
+              <BlogItem/>
+            </div>
           </el-col>
 
           <!-- 左 -->
@@ -65,7 +98,9 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+import BlogItem from "./BlogItem";
+
 export default {
   data() {
     return {
@@ -91,6 +126,9 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     }
+  },
+  components: {
+    BlogItem
   }
 };
 </script>
@@ -98,19 +136,48 @@ export default {
 <style scoped>
 .main-content {
   margin-top: 30px;
-  min-height: 600px;
+  min-height: 300px;
+}
+.left-content-item-img {
+  width: 110px;
+  display: inline-block;
+}
+.left-content-item-img img {
+  width: 150px;
+  height: 100px;
+}
+.left-content-item-container {
+  display: inline-block;
+}
+.footer-item {
+  font-size: 11px;
+}
+.tag {
+}
+.left-content-item-content {
+  font-size: 12px;
+  min-height: 60px;
+  padding: 10px 0px;
+}
+.left-content-item-footer {
+}
+.left-content-item {
+  margin: 20px 0px;
+}
+.left-content-item-title {
 }
 .el-row {
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
 .left-content {
-  background-color: red;
   padding-left: 0px;
+  padding-right: 10px;
+  text-align: left;
 }
 .right-content {
-  background-color: yellow;
   padding-right: 0px;
+  padding-left: 10px;
 }
 .content-col {
   height: 100px;
@@ -155,10 +222,9 @@ export default {
   position: fixed;
   width: 100%;
   min-width: 1000px;
-  z-index: 10;
+  z-index: 20;
 }
 .main-container {
-  height: 100%;
   width: 100%;
   min-width: 1000px;
   position: absolute;
