@@ -67,7 +67,7 @@
             </div>
           </el-col>
 
-          <!-- 左 -->
+          <!-- 右 -->
           <el-col :span="8">
             <div class="content-col right-content">
               <div class="recommend-authors-contain">
@@ -78,9 +78,13 @@
                       <i class="el-icon-refresh"></i>换一批
                     </span>
                   </el-col>
-                  <el-col :span="24" class="recommend-authors-item">
-                    
-                  </el-col>
+                  <AuthorItem
+                    v-for="item of authorList"
+                    :key="item.index"
+                    :avator="item.avator"
+                    :authorName="item.authorName"
+                    :attentionCount="item.attentionCount"
+                  />
                 </el-row>
               </div>
             </div>
@@ -93,6 +97,7 @@
 
 <script type="text/ecmascript-6">
 import BlogItem from "./BlogItem";
+import AuthorItem from "./AuthorItem";
 
 export default {
   data() {
@@ -111,6 +116,20 @@ export default {
         {
           index: 3,
           src: require("../../assets/images/3.jpg")
+        }
+      ],
+      authorList: [
+        {
+          index: 1,
+          authorName: "Lindaren",
+          avator: require("../../assets/images/3.jpg"),
+          attentionCount: "98"
+        },
+        {
+          index: 2,
+          authorName: "Baowen",
+          avator: require("../../assets/images/1.jpg"),
+          attentionCount: "66"
         }
       ],
       blogItemList: [
@@ -159,7 +178,8 @@ export default {
     this.title = "啦啦啦啦";
   },
   components: {
-    BlogItem
+    BlogItem,
+    AuthorItem
   }
 };
 </script>
@@ -175,7 +195,6 @@ export default {
   color: #999;
   font-size: 12px;
 }
-
 .main-content {
   margin-top: 30px;
   min-height: 300px;
@@ -186,6 +205,9 @@ export default {
 .el-row {
   margin-left: 0px !important;
   margin-right: 0px !important;
+}
+.recommend-authors-top {
+  margin-bottom: 10px;
 }
 .left-content {
   padding-left: 0px;
