@@ -16,9 +16,13 @@ export default {
   data() {
     return {
       isCollapse: true,
-      content: `# 你好
-                                    <p><code>java</code></p>
-                                    <p><span style="background-color: rgb(230, 0, 0);">asdf asdfasdf</span>adsf</p>`
+      content: `<html>
+ <head></head>
+ <body>
+  <p><span style="background-color: rgb(230, 0, 0);"> asdf asdfasdf</span>adsf</p>
+  <p><img src="https://lindaren.oss-cn-beijing.aliyuncs.com/blog/content/201906/05cb53c1818440288529b4325fce4083.jpg" width="216" style=""><img src="https://lindaren.oss-cn-beijing.aliyuncs.com/blog/content/201906/7e5492273f1b48d697e25b2ba59de879.jpg" width="184" style="cursor: nwse-resize;"></p>
+ </body>
+</html>`
     };
   },
   methods: {

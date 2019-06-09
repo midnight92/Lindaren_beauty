@@ -4,6 +4,7 @@
     <el-button type="primary" id="switchBtn" @click="switchMenu" icon="el-icon-search" circle></el-button>
 
     <el-main id="content">
+      <el-button type="primary" id="btn-upload-blog" @click="upload">发布文章</el-button>
       <!-- 博客编辑区 -->
       <el-container id="blog-edit-content">
         <!-- markdown编辑 -->
@@ -12,6 +13,7 @@
         </div>
         <!-- 富文本编辑 -->
         <div v-else-if="!isMarkdown">
+          <div v-html="content"></div>
           <quill-editor
             v-model="content"
             :options="editorOption"
@@ -34,7 +36,9 @@ import "@/assets/css/font.css";
 import * as Quill from "quill"; //引入编辑器
 import { quillEditor } from "vue-quill-editor";
 import { ImageDrop } from "quill-image-drop-module"; //quill图片可拖拽上传
-// import ImageResize from "quill-image-resize-module"; //quill图片可拖拽改变大小
+import ImageResize from "quill-image-resize-module"; //quill图片可拖拽改变大小
+
+import http from "@/common/http";
 
 const fonts = [
   "SimSun",
@@ -50,17 +54,19 @@ const Font = Quill.import("formats/font");
 Font.whitelist = fonts; //将字体加入到白名单
 Quill.register(Font, true);
 Quill.register("modules/imageDrop", ImageDrop);
-// Quill.register("modules/imageResize", ImageResize);
+Quill.register("modules/imageResize", ImageResize);
 
 export default {
   data() {
     return {
-      content: "",
+      content: `<p><span style="background-color: rgb(230, 0, 0);">
+        asdf asdfasdf</span>adsf</p>`,
+      markdowText: "",
       isMarkdown: true,
       editorOption: {
         modules: {
           imageDrop: true,
-          // imageResize: {},
+          imageResize: {},
           toolbar: [
             ["bold", "italic", "underline", "strike"],
             ["blockquote", "code-block"],
@@ -98,7 +104,12 @@ export default {
       console.log(key, keyPath);
     },
     changeData(value, render) {
+      //value 是markdown格式文本, render是转换后的html格式文本
       console.log("after ", value);
+      console.log("render ", render);
+      console.log("content ", this.content);
+
+      this.markdowText = value;
     },
     onEditorBlur(editor) {
       //失去焦点事件
@@ -109,7 +120,19 @@ export default {
     onEditorChange({ editor, html, text }) {
       //编辑器文本发生变化
       //this.content可以实时获取到当前编辑器内的文本内容
-      console.log(this.content);
+      console.log("html", this.html);
+      console.log("text", this.text);
+      console.log("content", this.content);
+    },
+    upload() {
+      http
+        .post("http://localhost/api/blog/saveBlog", {
+          blogContent: this.content
+        })
+        .then(data => {
+          console.log("res: ", data);
+        })
+        .catch(err => console.log(err));
     }
   }
 };
