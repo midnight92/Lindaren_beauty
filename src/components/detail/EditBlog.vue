@@ -9,7 +9,13 @@
       <el-container id="blog-edit-content">
         <!-- markdown编辑 -->
         <div v-if="isMarkdown">
-          <mavon-editor v-model="content" :ishljs="true" @change="changeData" class="mavonEditor"/>
+          <mavon-editor
+            v-model="content"
+            :ishljs="true"
+            @change="changeData"
+            @imgAdd="$imgAdd"
+            class="mavonEditor"
+          />
         </div>
         <!-- 富文本编辑 -->
         <div v-else-if="!isMarkdown">
@@ -32,6 +38,7 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import "@/assets/css/font.css";
+import hljs from "highlight.js";
 
 import * as Quill from "quill"; //引入编辑器
 import { quillEditor } from "vue-quill-editor";
@@ -59,9 +66,8 @@ Quill.register("modules/imageResize", ImageResize);
 export default {
   data() {
     return {
-      content: `<p><span style="background-color: rgb(230, 0, 0);">
-        asdf asdfasdf</span>adsf</p>`,
-      markdowText: "",
+      content: "",
+      mkdContent: "",
       isMarkdown: true,
       editorOption: {
         modules: {
@@ -109,7 +115,7 @@ export default {
       console.log("render ", render);
       console.log("content ", this.content);
 
-      this.markdowText = value;
+      this.mkdContent = value;
     },
     onEditorBlur(editor) {
       //失去焦点事件
@@ -133,7 +139,40 @@ export default {
           console.log("res: ", data);
         })
         .catch(err => console.log(err));
+    },
+    $imgAdd(pos, $file) {
+      // 第一步.将图片上传到服务器.
+      var formdata = new FormData();
+      formdata.append("file", $file);
+
+      http
+        .postFile("http://localhost/api/blog/upload", formdata)
+        .then(data => {
+          console.log("res: ", data);
+          
+        })
+        .catch(err => console.log(err));
+
+      // axios({
+      //   url: "server url",
+      //   method: "post",
+      //   data: formdata,
+      //   headers: { "Content-Type": "multipart/form-data" }
+      // }).then(url => {
+      //   // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+      //   /**
+      //    * $vm 指为mavonEditor实例，可以通过如下两种方式获取
+      //    * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
+      //    * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
+      //    */
+      //   $vm.$img2Url(pos, url);
+      // });
     }
+  },
+  created() {
+    this.editorOption.modules.syntax = {
+      highlight: text => hljs.highlightAuto(text).value
+    };
   }
 };
 </script>
