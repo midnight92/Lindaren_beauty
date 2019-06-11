@@ -9,7 +9,7 @@
       <el-container id="blog-edit-content">
         <!-- markdown编辑 -->
         <div v-if="isMarkdown">
-          <mavon-editor
+          <mavon-editor ref=md
             v-model="content"
             :ishljs="true"
             @change="changeData"
@@ -144,12 +144,14 @@ export default {
       // 第一步.将图片上传到服务器.
       var formdata = new FormData();
       formdata.append("file", $file);
+      var $vm = this.$refs.md;
+      console.log("$vm: ", $vm);
 
       http
         .postFile("http://localhost/api/blog/upload", formdata)
         .then(data => {
-          console.log("res: ", data);
-          
+          console.log("res: ", data.data);
+          $vm.$img2Url(pos, data.data);
         })
         .catch(err => console.log(err));
 

@@ -36,7 +36,6 @@ class HttpUtil {
       fetch(url, {
         method: 'POST',
         headers: {
-          'Content-type': 'multipart/form-data',
           'Access-Control-Request-Method': '*'
         },
         body: data

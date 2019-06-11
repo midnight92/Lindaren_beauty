@@ -19,7 +19,6 @@ export default {
       content: `<pre class="ql-syntax" spellcheck="false">public void main(String arg[]){
   String str = "abc";
 }
-
 </pre>`
     };
   },
