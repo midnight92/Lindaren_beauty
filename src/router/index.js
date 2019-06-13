@@ -6,6 +6,7 @@ import Unfreeze from '@/components/unfreeze/Unfreeze'
 import HomePage from '@/components/homePage/HomePage'
 import EditBlog from '@/components/detail/EditBlog'
 import ShowBlog from '@/components/detail/ShowBlog'
+import Aside from '@/components/detail/Aside'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/showBlog',
       name: 'ShowBlog',
       component: ShowBlog
+    },
+    {
+      path: '/aside',
+      name: 'Aside',
+      component: Aside
     }
   ]
 })

@@ -2,9 +2,43 @@
   <el-container class="main-container">
     <!-- 切换按钮 -->
     <el-button type="primary" id="switchBtn" @click="switchMenu" icon="el-icon-search" circle></el-button>
+    <el-button type="primary" id="collapseBtn" @click="collapse">切换</el-button>
 
-    <el-main id="content">
-      <el-button type="primary" id="btn-upload-blog" @click="upload">发布文章</el-button>
+    <!-- 主体内容 -->
+    <el-container id="content">
+      <el-menu default-active="1-4-1" class="menu-vertical" :collapse="isCollapse">
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span slot="title">导航一</span>
+          </template>
+          <el-menu-item-group>
+            <span slot="title">分组一</span>
+            <el-menu-item index="1-1">选项1</el-menu-item>
+            <el-menu-item index="1-2">选项2</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="分组2">
+            <el-menu-item index="1-3">选项3</el-menu-item>
+          </el-menu-item-group>
+          <el-submenu index="1-4">
+            <span slot="title">选项4</span>
+            <el-menu-item index="1-4-1">选项1</el-menu-item>
+          </el-submenu>
+        </el-submenu>
+        <el-menu-item index="2">
+          <i class="el-icon-menu"></i>
+          <span slot="title">导航二</span>
+        </el-menu-item>
+        <el-menu-item index="3" disabled>
+          <i class="el-icon-document"></i>
+          <span slot="title">导航三</span>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <i class="el-icon-setting"></i>
+          <span slot="title">导航四</span>
+        </el-menu-item>
+      </el-menu>
+
       <!-- 博客编辑区 -->
       <el-container id="blog-edit-content">
         <!-- markdown编辑 -->
@@ -31,7 +65,12 @@
           ></quill-editor>
         </div>
       </el-container>
-    </el-main>
+      <!-- 发布文章按钮 -->
+      <div>
+<el-button type="primary" id="btn-upload-blog" @click="upload" icon="el-icon-edit">发布文章</el-button>
+      </div>
+      
+    </el-container>
   </el-container>
 </template>
 
@@ -71,6 +110,7 @@ export default {
       content: "",
       mkdContent: "",
       isMarkdown: true,
+      isCollapse: true,
       markdownOption: {
         bold: true, // 粗体
         italic: true, // 斜体
@@ -137,6 +177,9 @@ export default {
     };
   },
   methods: {
+    collapse(key, keyPath) {
+      this.isCollapse = !this.isCollapse;
+    },
     switchMenu() {
       this.isMarkdown = !this.isMarkdown;
     },
@@ -241,6 +284,12 @@ export default {
 #content {
   background-color: #f6f6f6;
 }
+#blog-edit-content {
+  width: 1000px;
+}
+#aside-menu-content {
+  width: 400px;
+}
 #header-container {
   height: 300px;
   background-color: red;
@@ -260,5 +309,24 @@ export default {
   position: fixed;
   left: 10px;
   bottom: 10px;
+}
+#collapseBtn {
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  z-index: 999;
+}
+.menu-vertical {
+  position: absolute;
+  left: 0px;
+  z-index: 9;
+}
+#btn-upload-blog {
+  float: right;
+  margin: 10px 0px;
+}
+.menu-vertical:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
 </style>
