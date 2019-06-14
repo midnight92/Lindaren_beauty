@@ -7,6 +7,10 @@
     <!-- 主体内容 -->
     <el-container id="content">
       <el-menu default-active="1-4-1" class="menu-vertical" :collapse="isCollapse">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span slot="title">导航一</span>
+        </template>
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-location"></i>
@@ -42,7 +46,7 @@
       <!-- 博客编辑区 -->
       <el-container id="blog-edit-content">
         <!-- markdown编辑 -->
-        <div class="edit-container" v-if="isMarkdown">
+        <div class="edit-container">
           <mavon-editor
             ref="md"
             v-model="content"
@@ -51,25 +55,20 @@
             @change="changeData"
             @imgAdd="$imgAdd"
             class="mavonEditor"
+            v-if="isMarkdown"
           />
-        </div>
-        <!-- 富文本编辑 -->
-        <div class="edit-container" v-else-if="!isMarkdown">
-          <div v-html="content"></div>
           <quill-editor
             v-model="content"
             :options="editorOption"
             @blur="onEditorBlur($event)"
             @focus="onEditorFocus($event)"
             @change="onEditorChange($event)"
-          ></quill-editor>
+            v-else-if="!isMarkdown"
+          />
+          <!-- 发布文章按钮 -->
+          <el-button type="primary" id="btn-upload-blog" @click="upload" icon="el-icon-edit">发布文章</el-button>
         </div>
       </el-container>
-      <!-- 发布文章按钮 -->
-      <div>
-<el-button type="primary" id="btn-upload-blog" @click="upload" icon="el-icon-edit">发布文章</el-button>
-      </div>
-      
     </el-container>
   </el-container>
 </template>
@@ -284,9 +283,6 @@ export default {
 #content {
   background-color: #f6f6f6;
 }
-#blog-edit-content {
-  width: 1000px;
-}
 #aside-menu-content {
   width: 400px;
 }
@@ -317,7 +313,6 @@ export default {
   z-index: 999;
 }
 .menu-vertical {
-  position: absolute;
   left: 0px;
   z-index: 9;
 }
