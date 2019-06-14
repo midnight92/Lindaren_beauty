@@ -2,15 +2,13 @@
   <el-container class="main-container">
     <!-- 切换按钮 -->
     <el-button type="primary" id="switchBtn" @click="switchMenu" icon="el-icon-search" circle></el-button>
-    <el-button type="primary" id="collapseBtn" @click="collapse">切换</el-button>
 
     <!-- 主体内容 -->
     <el-container id="content">
       <el-menu default-active="1-4-1" class="menu-vertical" :collapse="isCollapse">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span slot="title">导航一</span>
-        </template>
+        <el-menu-item id="collapseBtn" index="0" @click="collapse">
+          <i class="el-icon-menu"></i>
+        </el-menu-item>
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-location"></i>
@@ -268,11 +266,12 @@ export default {
 .quill-editor {
   height: 350px;
 }
+#blog-edit-content {
+  padding: 20px;
+}
 .main-container {
-  height: 100%;
   width: 100%;
-  min-height: 1000px;
-  position: absolute;
+  min-height: 800px;
 }
 .unfreeze-content {
   height: 400px;
@@ -307,10 +306,7 @@ export default {
   bottom: 10px;
 }
 #collapseBtn {
-  position: fixed;
-  left: 10px;
-  bottom: 10px;
-  z-index: 999;
+  margin-bottom: 30px;
 }
 .menu-vertical {
   left: 0px;
