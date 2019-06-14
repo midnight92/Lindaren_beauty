@@ -4,21 +4,21 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/login/Login'
 import Unfreeze from '@/components/unfreeze/Unfreeze'
 import HomePage from '@/components/homePage/HomePage'
-import EditBlog from '@/components/detail/EditBlog'
-import ShowBlog from '@/components/detail/ShowBlog'
-import Aside from '@/components/detail/Aside'
+import EditBlog from '@/components/blog/EditBlog'
+import ShowBlog from '@/components/blog/ShowBlog'
+import MyHome from '@/components/author/MyHome'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    // {
+    //   path: '/',
+    //   name: 'HelloWorld',
+    //   component: HelloWorld
+    // },
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path: '/login',
       name: 'Login',
       component: Login
     },
@@ -43,9 +43,9 @@ export default new Router({
       component: ShowBlog
     },
     {
-      path: '/aside',
-      name: 'Aside',
-      component: Aside
+      path: '/myHome',
+      name: 'MyHome',
+      component: MyHome
     }
   ]
 })

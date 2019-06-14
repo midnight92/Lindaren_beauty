@@ -16,10 +16,13 @@ export default {
   data() {
     return {
       isCollapse: true,
-      content: `<pre class="ql-syntax" spellcheck="false">public void main(String arg[]){
-  String str = "abc";
-}
-</pre>`
+      content: `<html>
+ <head></head>
+ <body>
+  <p><span style="background-color: rgb(230, 0, 0);"> asdf asdfasdf</span>adsf</p>
+  <p><img src="https://lindaren.oss-cn-beijing.aliyuncs.com/blog/content/201906/05cb53c1818440288529b4325fce4083.jpg" width="216" style=""><img src="https://lindaren.oss-cn-beijing.aliyuncs.com/blog/content/201906/7e5492273f1b48d697e25b2ba59de879.jpg" width="184" style="cursor: nwse-resize;"></p>
+ </body>
+</html>`
     };
   },
   methods: {
@@ -46,23 +49,8 @@ export default {
   min-height: 1000px;
   position: absolute;
 }
-.unfreeze-content {
-  height: 400px;
-  padding-top: 60px;
-  background-color: #ffffff;
-  border-radius: 2px;
-}
 #content {
   background-color: #f6f6f6;
-}
-#header-container {
-  height: 300px;
-  background-color: red;
-}
-#header-container {
-  background-color: gold;
-  height: 250px;
-  margin-top: 50px;
 }
 .el-menu-vertical:not(.el-menu--collapse) {
   width: 300px;

@@ -1,0 +1,13 @@
+.global-outer-row {
+  margin: 61px 0px 0px 0px;
+}
+.global-content {
+  background-color: #ffffff;
+}
+.global-main-container {
+  width: 100%;
+  min-width: 1000px;
+  min-height: 800px;
+  position: absolute;
+  background-color: #f6f6f6;
+}

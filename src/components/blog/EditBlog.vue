@@ -52,7 +52,7 @@
             :ishljs="true"
             @change="changeData"
             @imgAdd="$imgAdd"
-            class="mavonEditor"
+            class="mavon-editor"
             v-if="isMarkdown"
           />
           <quill-editor
@@ -257,20 +257,22 @@ export default {
 </script>
 
 <style scoped>
-.mavonEditor {
+.mavon-editor {
   width: 100%;
+  height: 550px;
 }
 .edit-container {
   width: 100%;
 }
 .quill-editor {
-  height: 350px;
+  height: 550px;
 }
 #blog-edit-content {
   padding: 20px;
 }
 .main-container {
   width: 100%;
+  min-width: 1200px;
   min-height: 800px;
 }
 .unfreeze-content {
@@ -302,7 +304,7 @@ export default {
 }
 #switchBtn {
   position: fixed;
-  left: 10px;
+  right: 10px;
   bottom: 10px;
 }
 #collapseBtn {
@@ -314,7 +316,7 @@ export default {
 }
 #btn-upload-blog {
   float: right;
-  margin: 10px 0px;
+  margin: 50px 0px;
 }
 .menu-vertical:not(.el-menu--collapse) {
   width: 200px;

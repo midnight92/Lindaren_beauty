@@ -11,6 +11,9 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 Vue.use(mavonEditor)
 
+//公共样式
+import './assets/css/global.css'
+
 //Element-UI
 import {
   Pagination,
