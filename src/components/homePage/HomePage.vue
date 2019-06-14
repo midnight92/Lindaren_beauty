@@ -17,11 +17,11 @@
           </el-col>
         </el-row>
 
-        <!-- 左右分栏 -->
-        <el-row class="main-content" :gutter="0">
+        <!-- 中间内容 -->
+        <el-row class="global-main-content" :gutter="0">
           <!-- 左 -->
           <el-col :span="16">
-            <div class="content-col left-content">
+            <div class="content-col global-left-content">
               <BlogItem
                 v-for="item of blogItemList"
                 :key="item.key"
@@ -38,7 +38,7 @@
 
           <!-- 右 -->
           <el-col :span="8">
-            <div class="content-col right-content">
+            <div class="content-col global-right-content">
               <div class="recommend-authors-contain">
                 <el-row :gutter="0">
                   <el-col :span="24" class="recommend-authors-top">
@@ -135,9 +135,7 @@ export default {
       ]
     };
   },
-  created: function() {
-   
-  },
+  created: function() {},
   components: {
     BlogItem,
     AuthorItem,
@@ -157,29 +155,13 @@ export default {
   color: #999;
   font-size: 12px;
 }
-.main-content {
-  margin-top: 30px;
-  min-height: 300px;
-}
 .footer-item {
   font-size: 11px;
-}
-.el-row {
-  margin-left: 0px !important;
-  margin-right: 0px !important;
 }
 .recommend-authors-top {
   margin-bottom: 10px;
 }
-.left-content {
-  padding-left: 0px;
-  padding-right: 10px;
-  text-align: left;
-}
-.right-content {
-  padding-right: 0px;
-  padding-left: 10px;
-}
+
 .show-box {
   height: 300px;
 }

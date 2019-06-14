@@ -1,15 +1,26 @@
 <template>
-  <el-container class="global-main-container">
+  <div class="global-main-container">
     <!-- 导航栏 -->
     <LHeader/>
 
     <!-- 主内容 -->
     <el-row class="global-outer-row" :gutter="20">
       <el-col class="global-content" :offset="3" :span="18">
-        <el-row class="main-content" :gutter="0"></el-row>
+        <!-- 中间内容 -->
+        <el-row class="global-main-content" :gutter="0">
+          <!-- 左 -->
+          <el-col :span="16">
+            <div class="content-col global-left-content"></div>
+          </el-col>
+
+          <!-- 右 -->
+          <el-col :span="8">
+            <div class="content-col global-right-content"></div>
+          </el-col>
+        </el-row>
       </el-col>
     </el-row>
-  </el-container>
+  </div>
 </template>
 
 
@@ -28,10 +39,4 @@ export default {
 </script>
 
 <style scoped>
-.main-container {
-  height: 100%;
-  width: 100%;
-  min-height: 1000px;
-  position: absolute;
-}
 </style>
