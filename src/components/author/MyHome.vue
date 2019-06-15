@@ -10,7 +10,34 @@
         <el-row class="global-main-content" :gutter="0">
           <!-- 左 -->
           <el-col :span="16">
-            <div class="content-col global-left-content"></div>
+            <div class="content-col global-left-content">
+              <div class="meta-info">
+                <el-row>
+                  <el-col :span="4" class="avator-box">
+                    <img id="avator" src>
+                  </el-col>
+                  <el-col :span="20">
+                    <div class="author-info">
+                      <div class="author-name">若琳</div>
+                      <el-row>
+                        <el-col :span="5" class="info-item attention">
+                          <div class="grid-content bg-purple"></div>
+                        </el-col>
+                        <el-col :span="5" class="info-item fans">
+                          <div class="grid-content bg-purple-light"></div>
+                        </el-col>
+                        <el-col :span="5" class="info-item article">
+                          <div class="grid-content bg-purple"></div>
+                        </el-col>
+                        <el-col :span="5" class="info-item like">
+                          <div class="grid-content bg-purple-light"></div>
+                        </el-col>
+                      </el-row>
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+            </div>
           </el-col>
 
           <!-- 右 -->
@@ -39,4 +66,7 @@ export default {
 </script>
 
 <style scoped>
+.meta-info {
+  height: 100px;
+}
 </style>

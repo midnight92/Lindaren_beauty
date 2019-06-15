@@ -28,3 +28,6 @@
   padding-right: 0px;
   padding-left: 10px;
 }
+.content-col{
+  min-height: 500px;
+}
