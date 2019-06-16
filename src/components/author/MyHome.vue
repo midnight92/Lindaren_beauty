@@ -69,9 +69,9 @@
                       :imgSrc="item.imgSrc"
                     />
                   </el-tab-pane>
-                  <el-tab-pane label="动态" name="second">动态</el-tab-pane>
+                  <!-- <el-tab-pane label="动态" name="second">动态</el-tab-pane>
                   <el-tab-pane label="最新评论" name="third">最新评论</el-tab-pane>
-                  <el-tab-pane label="热门" name="fourth">热门</el-tab-pane>
+                  <el-tab-pane label="热门" name="fourth">热门</el-tab-pane> -->
                 </el-tabs>
               </div>
             </div>
@@ -79,7 +79,18 @@
 
           <!-- 右 -->
           <el-col :span="8">
-            <div class="content-col global-right-content"></div>
+            <div class="content-col global-right-content">
+              <div class="right-item"><i class="el-icon-share"></i>&nbsp;&nbsp;我的关注</div>
+              <div class="right-item"><i class="el-icon-share"></i>&nbsp;&nbsp;我喜欢的文章</div>
+              <div class="right-item my-blog-collection">
+                <div class="title">我的文集</div>
+                <div class="collection-list">
+                  <div class="collection-item"><i class="el-icon-edit"></i>&nbsp;&nbsp;并发编程</div>
+                  <div class="collection-item"><i class="el-icon-edit"></i>&nbsp;&nbsp;Spring</div>
+                  <div class="collection-item"><i class="el-icon-edit"></i>&nbsp;&nbsp;日常笔记</div>
+                </div>
+              </div>
+            </div>
           </el-col>
         </el-row>
       </el-col>
@@ -166,5 +177,20 @@ export default {
   width: 70px;
   height: 70px;
   border-radius: 100px;
+}
+.title {
+  color: #999;
+  padding: 15px 0px;
+  border-top: 1px solid #f0f0f0;
+}
+.right-item {
+  font-size: 13px;
+  margin: 10px 0px;
+  color: #333;
+}
+.collection-list {
+}
+.collection-item {
+      margin: 5px 0px;
 }
 </style>

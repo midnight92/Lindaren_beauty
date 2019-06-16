@@ -26,7 +26,8 @@
 }
 .global-right-content {
   padding-right: 0px;
-  padding-left: 10px;
+  padding-left: 20px;
+  text-align: left;
 }
 .content-col{
   min-height: 500px;

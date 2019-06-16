@@ -78,7 +78,8 @@ export default {
 .left-content-item-img img {
   width: 150px;
   height: 100px;
-  border-radius: 2px;
+  border-radius: 5px;
+  border: 1px solid #f6f6f6;
 }
 .tiny-width {
   width: 520px;
@@ -104,5 +105,6 @@ export default {
 }
 .left-content-item-title {
   color: #000;
+  cursor: pointer;
 }
 </style>
