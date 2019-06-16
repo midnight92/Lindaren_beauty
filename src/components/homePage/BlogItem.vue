@@ -1,7 +1,7 @@
 <template>
   <div class="left-content-item">
     <div :class="[hasImg ? 'tiny-width' : '']" class="left-content-item-container">
-      <div class="left-content-item-title">{{title}}</div>
+      <div class="left-content-item-title"><a href="">{{title}}</a></div>
       <div class="left-content-item-content">{{content}}</div>
       <div class="left-content-item-footer">
         <el-button v-for="item of tags" :key="item" class="footer-item tag">{{item}}</el-button>
@@ -105,6 +105,5 @@ export default {
 }
 .left-content-item-title {
   color: #000;
-  cursor: pointer;
 }
 </style>

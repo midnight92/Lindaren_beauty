@@ -1,9 +1,12 @@
-.global-outer-row {
+.global-outer-content {
   margin: 61px 0px 0px 0px;
 }
+
 .global-content {
   background-color: #ffffff;
+  min-height: 500px;
 }
+
 .global-main-container {
   width: 100%;
   min-width: 1000px;
@@ -11,24 +14,47 @@
   position: absolute;
   background-color: #f6f6f6;
 }
+
 .global-main-content {
   margin-top: 30px;
   min-height: 300px;
 }
+
 .el-row {
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+
 .global-left-content {
   padding-left: 20px;
   padding-right: 10px;
   text-align: left;
 }
+
 .global-right-content {
   padding-right: 0px;
   padding-left: 20px;
   text-align: left;
 }
-.content-col{
+
+.content-col {
   min-height: 500px;
+}
+
+a:link {
+  color: #333;
+  text-decoration: none;
+}
+
+a:active {
+  color: #333;
+}
+
+a:visited {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #333;
 }

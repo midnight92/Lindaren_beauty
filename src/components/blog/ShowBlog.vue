@@ -1,17 +1,62 @@
 <template>
-  <el-container class="main-container">
+  <div class="global-main-container">
+    <!-- 导航栏 -->
+    <LHeader/>
+
     <!-- 主内容 -->
-    <el-main id="content">
-      <!-- 博客展示区 -->
-      <el-container id="blog-show_content">
-        <div  v-html="content"></div>
+    <el-row class="global-outer-content" :gutter="20">
+      <el-col class="global-content" :offset="4" :span="16">
+        <!-- 博客展示区 -->
+        <div class="article-title">Spring Boot 面试，一个问题就干趴下了</div>
+        <div class="article-info">
+          <el-row>
+            <el-col :span="4">
+              <div class="author-header">
+                <img id="header-img" src="../../assets/images/header.jpg">
+              </div>
+            </el-col>
+            <el-col :span="20">
+              <div class="author-name">
+                <span class="author-name-text">若琳</span>
+                <el-button id="edit-blog" round>编辑文章</el-button>
+              </div>
+              <el-row class="article-info-box">
+                <el-col :span="4" class="info-item">
+                  <span class="name">时间</span>
+                  <span class="blog-date">2019-06-12 21:22</span>
+                </el-col>
+                <el-col :span="2" class="info-item">
+                  <span class="name">字数</span>
+                  <span class="value">3580</span>
+                </el-col>
+                <el-col :span="2" class="info-item">
+                  <span class="name">评论</span>
+                  <span class="value">6</span>
+                </el-col>
+                <el-col :span="2" class="info-item">
+                  <span class="name">阅读</span>
+                  <span class="value">8</span>
+                </el-col>
+                <el-col :span="2" class="info-item">
+                  <span class="name">喜欢</span>
+                  <span class="value">8</span>
+                </el-col>
+              </el-row>
+            </el-col>
+          </el-row>
+        </div>
+        <div id="blog-container">
+          <div v-html="content"></div>
+        </div>
         <!-- <mavon-editor v-html="content" :subfield="false" :defaultOpen=preview :toolbarsFlag="false" :boxShadow="false" @change="changeData" /> -->
-      </el-container>
-    </el-main>
-  </el-container>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
+import LHeader from "../commons/Header";
+
 export default {
   data() {
     return {
@@ -36,31 +81,46 @@ export default {
       console.log(key, keyPath);
     },
     changeData(value, render) {
-            console.log('after ', value);
-        }
+      console.log("after ", value);
+    }
+  },
+  components: {
+    LHeader
   }
 };
 </script>
 
 <style scoped>
-.main-container {
-  height: 100%;
-  width: 100%;
-  min-height: 1000px;
-  position: absolute;
+.article-title {
+  font-family: -apple-system, SF UI Display, Arial, PingFang SC,
+    Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 20px 0px 30px 0px;
 }
-#content {
-  background-color: #f6f6f6;
+#header-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
-.el-menu-vertical:not(.el-menu--collapse) {
-  width: 300px;
-  height: 100%;
+.author-name-text {
+}
+.article-info {
   text-align: left;
-  padding-left: 20px;
 }
-#switchBtn {
-  position: fixed;
-  left: 10px;
-  bottom: 10px;
+.author-header {
+  text-align: center;
+}
+.info-item {
+  font-size: 12px;
+  color: #999;
+}
+#edit-blog {
+  position: relative;
+  left: 600px;
+}
+#blog-container {
+  margin: 50px;
 }
 </style>

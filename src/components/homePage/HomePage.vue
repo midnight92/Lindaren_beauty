@@ -4,7 +4,7 @@
     <LHeader/>
 
     <!-- 主内容 -->
-    <el-row class="global-outer-row" :gutter="20">
+    <el-row class="global-outer-content" :gutter="20">
       <el-col class="global-content" :offset="3" :span="18">
         <!-- 轮播图 -->
         <el-row>
