@@ -72,15 +72,16 @@ export default {
   color: #999;
 }
 .left-content-item-img {
-  width: 110px;
+  width: 150px;
   display: inline-block;
 }
 .left-content-item-img img {
   width: 150px;
   height: 100px;
+  border-radius: 2px;
 }
 .tiny-width {
-  width: 470px;
+  width: 520px;
 }
 .left-content-item-container {
   display: inline-block;
