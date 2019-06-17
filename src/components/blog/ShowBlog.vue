@@ -7,7 +7,7 @@
     <el-row class="global-outer-content" :gutter="20">
       <el-col class="global-content" :offset="4" :span="16">
         <!-- 博客展示区 -->
-        <div class="article-title">Spring Boot 面试，一个问题就干趴下了</div>
+        <div class="article-title">{{blogTitle}}</div>
         <div class="article-info">
           <el-row>
             <el-col :span="4">
@@ -23,7 +23,7 @@
               <el-row class="article-info-box">
                 <el-col :span="4" class="info-item">
                   <span class="name">时间</span>
-                  <span class="blog-date">2019-06-12 21:22</span>
+                  <span class="blog-date">{{blogTime}}</span>
                 </el-col>
                 <el-col :span="2" class="info-item">
                   <span class="name">字数</span>
@@ -31,15 +31,15 @@
                 </el-col>
                 <el-col :span="2" class="info-item">
                   <span class="name">评论</span>
-                  <span class="value">6</span>
+                  <span class="value">{{blogCommentCount}}</span>
                 </el-col>
                 <el-col :span="2" class="info-item">
                   <span class="name">阅读</span>
-                  <span class="value">8</span>
+                  <span class="value">{{blogViews}}</span>
                 </el-col>
                 <el-col :span="2" class="info-item">
                   <span class="name">喜欢</span>
-                  <span class="value">8</span>
+                  <span class="value">{{blogLikeCount}}</span>
                 </el-col>
               </el-row>
             </el-col>
@@ -47,8 +47,8 @@
         </div>
         <div id="blog-container">
           <div v-html="content"></div>
+          <!-- <mavon-editor v-html="content" :subfield="false" :defaultOpen=preview :toolbarsFlag="false" :boxShadow="false" @change="changeData" /> -->
         </div>
-        <!-- <mavon-editor v-html="content" :subfield="false" :defaultOpen=preview :toolbarsFlag="false" :boxShadow="false" @change="changeData" /> -->
       </el-col>
     </el-row>
   </div>
@@ -56,18 +56,18 @@
 
 <script>
 import LHeader from "../commons/Header";
+import http from "@/common/http";
 
 export default {
   data() {
     return {
-      isCollapse: true,
-      content: `<html>
- <head></head>
- <body>
-  <p><span style="background-color: rgb(230, 0, 0);"> asdf asdfasdf</span>adsf</p>
-  <p><img src="https://lindaren.oss-cn-beijing.aliyuncs.com/blog/content/201906/05cb53c1818440288529b4325fce4083.jpg" width="216" style=""><img src="https://lindaren.oss-cn-beijing.aliyuncs.com/blog/content/201906/7e5492273f1b48d697e25b2ba59de879.jpg" width="184" style="cursor: nwse-resize;"></p>
- </body>
-</html>`
+      content: "",
+      blogCommentCount: 0,
+      blogId: "",
+      blogLikeCount: 0,
+      blogTitle: "",
+      blogViews: 0,
+      blogTime: ""
     };
   },
   methods: {
@@ -86,6 +86,23 @@ export default {
   },
   components: {
     LHeader
+  },
+  created: function() {
+    http
+      .post("http://localhost/api/blog/show", {
+        blogId: "b4"
+      })
+      .then(data => {
+        console.log("res: ", data);
+        let blog = data.data;
+        this.content = blog.blogContent;
+        this.blogTitle = blog.blogTitle;
+        this.blogCommentCount = blog.blogCommentCount;
+        this.blogLikeCount = blog.blogLikeCount;
+        this.blogViews = blog.blogViews;
+        this.blogTime = blog.createTime;
+      })
+      .catch(err => console.log(err));
   }
 };
 </script>
@@ -104,8 +121,6 @@ export default {
   height: 50px;
   border-radius: 50px;
 }
-.author-name-text {
-}
 .article-info {
   text-align: left;
 }
@@ -122,5 +137,6 @@ export default {
 }
 #blog-container {
   margin: 50px;
+  text-align: left;
 }
 </style>

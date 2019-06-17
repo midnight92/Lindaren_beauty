@@ -105,6 +105,7 @@ export default {
   data() {
     return {
       content: "",
+      blogContent: "",
       mkdContent: "",
       isMarkdown: true,
       isCollapse: true,
@@ -188,11 +189,11 @@ export default {
     },
     changeData(value, render) {
       //value 是markdown格式文本, render是转换后的html格式文本
-      console.log("after ", value);
-      console.log("render ", render);
-      console.log("content ", this.content);
+      console.log("value:", value);
+      console.log("render:", render);
 
       this.mkdContent = value;
+      this.blogContent = render;
     },
     onEditorBlur(editor) {
       //失去焦点事件
@@ -208,9 +209,11 @@ export default {
       console.log("content", this.content);
     },
     upload() {
+      console.log("content: ", this.content);
+      console.log("blogContent: ", this.blogContent);
       http
         .post("http://localhost/api/blog/saveBlog", {
-          blogContent: this.content
+          blogContent: this.blogContent
         })
         .then(data => {
           console.log("res: ", data);

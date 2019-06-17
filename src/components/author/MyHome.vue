@@ -80,14 +80,14 @@
           <!-- 右 -->
           <el-col :span="8">
             <div class="content-col global-right-content">
-              <div class="right-item"><i class="el-icon-share"></i>&nbsp;&nbsp;我的关注</div>
-              <div class="right-item"><i class="el-icon-share"></i>&nbsp;&nbsp;我喜欢的文章</div>
+              <div class="right-item"><i class="el-icon-view"></i>&nbsp;&nbsp;我的关注</div>
+              <div class="right-item"><i class="el-icon-star-on"></i>&nbsp;&nbsp;我喜欢的文章</div>
               <div class="right-item my-blog-collection">
                 <div class="title">我的文集</div>
                 <div class="collection-list">
-                  <div class="collection-item"><i class="el-icon-edit"></i>&nbsp;&nbsp;并发编程</div>
-                  <div class="collection-item"><i class="el-icon-edit"></i>&nbsp;&nbsp;Spring</div>
-                  <div class="collection-item"><i class="el-icon-edit"></i>&nbsp;&nbsp;日常笔记</div>
+                  <div class="collection-item"><i class="el-icon-tickets"></i>&nbsp;&nbsp;并发编程</div>
+                  <div class="collection-item"><i class="el-icon-tickets"></i>&nbsp;&nbsp;Spring</div>
+                  <div class="collection-item"><i class="el-icon-tickets"></i>&nbsp;&nbsp;日常笔记</div>
                 </div>
               </div>
             </div>
