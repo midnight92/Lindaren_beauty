@@ -139,4 +139,7 @@ export default {
   margin: 50px;
   text-align: left;
 }
+#blog-container img {
+  max-width: 100%;
+}
 </style>

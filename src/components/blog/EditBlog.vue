@@ -43,8 +43,27 @@
 
       <!-- 博客编辑区 -->
       <el-container id="blog-edit-content">
-        <!-- markdown编辑 -->
         <div class="edit-container">
+          <!-- 标题 -->
+          <div class="title-container">
+            <el-input placeholder="标题" v-model="title" class="input-with-select">
+              <el-select class="blog-title" v-model="select" slot="prepend" placeholder="请选择">
+                <el-option label="餐厅名餐厅名餐厅名" value="1"></el-option>
+                <el-option label="订单号" value="2"></el-option>
+                <el-option label="用户电话" value="3"></el-option>
+              </el-select>
+              <el-button
+                type="primary"
+                slot="append"
+                id="btn-upload-blog"
+                @click="upload"
+                icon="el-icon-edit"
+              >发布文章</el-button>
+            </el-input>
+          </div>
+          <!-- 标签 -->
+          <Tags/>
+          <!-- markdown编辑 -->
           <mavon-editor
             ref="md"
             v-model="content"
@@ -55,6 +74,7 @@
             class="mavon-editor"
             v-if="isMarkdown"
           />
+          <!-- 富文本编辑 -->
           <quill-editor
             v-model="content"
             :options="editorOption"
@@ -63,8 +83,6 @@
             @change="onEditorChange($event)"
             v-else-if="!isMarkdown"
           />
-          <!-- 发布文章按钮 -->
-          <el-button type="primary" id="btn-upload-blog" @click="upload" icon="el-icon-edit">发布文章</el-button>
         </div>
       </el-container>
     </el-container>
@@ -82,7 +100,7 @@ import * as Quill from "quill"; //引入编辑器
 import { quillEditor } from "vue-quill-editor";
 import { ImageDrop } from "quill-image-drop-module"; //quill图片可拖拽上传
 import ImageResize from "quill-image-resize-module"; //quill图片可拖拽改变大小
-
+import Tags from "../commons/Tags";
 import http from "@/common/http";
 
 const fonts = [
@@ -104,6 +122,7 @@ Quill.register("modules/imageResize", ImageResize);
 export default {
   data() {
     return {
+      title: "",
       content: "",
       blogContent: "",
       mkdContent: "",
@@ -171,7 +190,8 @@ export default {
           ]
         },
         theme: "snow"
-      }
+      },
+      select: "Java多线程"
     };
   },
   methods: {
@@ -234,22 +254,10 @@ export default {
           $vm.$img2Url(pos, data.data);
         })
         .catch(err => console.log(err));
-
-      // axios({
-      //   url: "server url",
-      //   method: "post",
-      //   data: formdata,
-      //   headers: { "Content-Type": "multipart/form-data" }
-      // }).then(url => {
-      //   // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-      //   /**
-      //    * $vm 指为mavonEditor实例，可以通过如下两种方式获取
-      //    * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
-      //    * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
-      //    */
-      //   $vm.$img2Url(pos, url);
-      // });
     }
+  },
+  components: {
+    Tags
   },
   created() {
     this.editorOption.modules.syntax = {
@@ -262,13 +270,13 @@ export default {
 <style scoped>
 .mavon-editor {
   width: 100%;
-  height: 550px;
+  height: 600px;
 }
 .edit-container {
   width: 100%;
 }
 .quill-editor {
-  height: 550px;
+  height: 600px;
 }
 #blog-edit-content {
   padding: 20px;
@@ -318,11 +326,24 @@ export default {
   z-index: 9;
 }
 #btn-upload-blog {
-  float: right;
-  margin: 50px 0px;
+  color: #fff;
+  background-color: #409eff;
+  border-radius: 0px 3px 3px 0px;
+}
+#btn-upload-blog:hover {
+  background-color: #66b1ff;
 }
 .menu-vertical:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+}
+.title-container {
+  margin: 20px 0px;
+}
+.el-select .el-input {
+  width: 130px;
+}
+.blog-title {
+  width: 150px;
 }
 </style>
