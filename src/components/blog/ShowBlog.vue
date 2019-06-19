@@ -21,7 +21,7 @@
                 <el-button id="edit-blog" round>编辑文章</el-button>
               </div>
               <el-row class="article-info-box">
-                <el-col :span="4" class="info-item">
+                <el-col :span="5" class="info-item">
                   <span class="name">时间</span>
                   <span class="blog-date">{{blogTime}}</span>
                 </el-col>

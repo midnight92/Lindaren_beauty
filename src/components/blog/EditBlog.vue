@@ -62,7 +62,7 @@
             </el-input>
           </div>
           <!-- 标签 -->
-          <Tags/>
+          <Tags @updateTags="updateTags"/>
           <!-- markdown编辑 -->
           <mavon-editor
             ref="md"
@@ -102,6 +102,7 @@ import { ImageDrop } from "quill-image-drop-module"; //quill图片可拖拽上�
 import ImageResize from "quill-image-resize-module"; //quill图片可拖拽改变大小
 import Tags from "../commons/Tags";
 import http from "@/common/http";
+import { connect } from "net";
 
 const fonts = [
   "SimSun",
@@ -126,6 +127,7 @@ export default {
       content: "",
       blogContent: "",
       mkdContent: "",
+      blogTags: [],
       isMarkdown: true,
       isCollapse: true,
       markdownOption: {
@@ -233,7 +235,10 @@ export default {
       console.log("blogContent: ", this.blogContent);
       http
         .post("http://localhost/api/blog/saveBlog", {
-          blogContent: this.blogContent
+          blogContent: this.blogContent,
+          blogTitle: this.title,
+          category: this.select,
+          blogTags: this.blogTags
         })
         .then(data => {
           console.log("res: ", data);
@@ -254,6 +259,9 @@ export default {
           $vm.$img2Url(pos, data.data);
         })
         .catch(err => console.log(err));
+    },
+    updateTags(tags) {
+      this.blogTags = tags;
     }
   },
   components: {

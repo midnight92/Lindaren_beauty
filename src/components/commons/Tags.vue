@@ -33,14 +33,12 @@ export default {
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
-
     showInput() {
       this.inputVisible = true;
       this.$nextTick(_ => {
         this.$refs.saveTagInput.$refs.input.focus();
       });
     },
-
     handleInputConfirm() {
       let inputValue = this.inputValue;
       if (inputValue) {
@@ -48,6 +46,7 @@ export default {
       }
       this.inputVisible = false;
       this.inputValue = "";
+      this.$emit("updateTags", this.dynamicTags);
     }
   }
 };
