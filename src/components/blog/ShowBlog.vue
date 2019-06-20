@@ -45,6 +45,14 @@
             </el-col>
           </el-row>
         </div>
+        <div class="tags-container">
+          <el-tag
+            v-for="item in items"
+            :key="item.label"
+            :type="item.type"
+            effect="dark"
+          >{{ item.label }}</el-tag>
+        </div>
         <div id="blog-container">
           <div v-html="content"></div>
           <!-- <mavon-editor v-html="content" :subfield="false" :defaultOpen=preview :toolbarsFlag="false" :boxShadow="false" @change="changeData" /> -->
@@ -67,7 +75,8 @@ export default {
       blogLikeCount: 0,
       blogTitle: "",
       blogViews: 0,
-      blogTime: ""
+      blogTime: "",
+      items: [{ type: "", label: "标签一" }]
     };
   },
   methods: {
@@ -90,7 +99,7 @@ export default {
   created: function() {
     http
       .post("http://localhost/api/blog/show", {
-        blogId: "b4"
+        blogId: "blog1561047648304"
       })
       .then(data => {
         console.log("res: ", data);
@@ -141,5 +150,10 @@ export default {
 }
 #blog-container img {
   max-width: 100%;
+}
+.tags-container {
+  text-align: left;
+  padding: 0px 50px;
+  margin: 10px 0px;
 }
 </style>

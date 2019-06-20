@@ -24,7 +24,7 @@
 export default {
   data() {
     return {
-      dynamicTags: ["Java", "多线程", "个人博客"],
+      dynamicTags: [],
       inputVisible: false,
       inputValue: ""
     };

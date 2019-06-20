@@ -236,9 +236,9 @@ export default {
       http
         .post("http://localhost/api/blog/saveBlog", {
           blogContent: this.blogContent,
-          blogTitle: this.title,
+          title: this.title,
           category: this.select,
-          blogTags: this.blogTags
+          tags: this.blogTags
         })
         .then(data => {
           console.log("res: ", data);
