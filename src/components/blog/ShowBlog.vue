@@ -76,7 +76,7 @@ export default {
       blogTitle: "",
       blogViews: 0,
       blogTime: "",
-      items: [{ type: "", label: "标签一" }]
+      items: []
     };
   },
   methods: {
@@ -103,13 +103,20 @@ export default {
       })
       .then(data => {
         console.log("res: ", data);
-        let blog = data.data;
+        let result = data.data;
+        let blog = result.blog;
+        let tagArr = result.tags;
+
         this.content = blog.blogContent;
         this.blogTitle = blog.blogTitle;
         this.blogCommentCount = blog.blogCommentCount;
         this.blogLikeCount = blog.blogLikeCount;
         this.blogViews = blog.blogViews;
         this.blogTime = blog.createTime;
+
+        for (let i = 0; i < tagArr.length; i++) {
+          this.items.push({ type: "", label: tagArr[i] });
+        }
       })
       .catch(err => console.log(err));
   }
