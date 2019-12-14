@@ -64,25 +64,31 @@
           <!-- 标签 -->
           <Tags @updateTags="updateTags"/>
           <!-- markdown编辑 -->
-          <mavon-editor
-            ref="md"
-            v-model="content"
-            :toolbars="markdownOption"
-            :ishljs="true"
-            @change="changeData"
-            @imgAdd="$imgAdd"
-            class="mavon-editor"
-            v-if="isMarkdown"
-          />
+          <div class="editor-box" v-if="isMarkdown">
+            markdown编辑器
+            <mavon-editor
+              ref="md"
+              v-model="content"
+              :toolbars="markdownOption"
+              :ishljs="true"
+              @change="mkdOnChange"
+              @imgAdd="$imgAdd"
+              class="mavon-editor"
+            />
+          </div>
+          
           <!-- 富文本编辑 -->
-          <quill-editor
-            v-model="content"
-            :options="editorOption"
-            @blur="onEditorBlur($event)"
-            @focus="onEditorFocus($event)"
-            @change="onEditorChange($event)"
-            v-else-if="!isMarkdown"
-          />
+          <div class="editor-box" v-if="!isMarkdown">
+            富文本编辑器
+            <quill-editor
+              v-model="content"
+              :options="editorOption"
+              @blur="onEditorBlur($event)"
+              @focus="onEditorFocus($event)"
+              @change="onEditorChange($event)"
+            />
+          </div>
+          
         </div>
       </el-container>
     </el-container>
@@ -123,10 +129,10 @@ Quill.register("modules/imageResize", ImageResize);
 export default {
   data() {
     return {
-      title: "",
-      content: "",
-      blogContent: "",
-      mkdContent: "",
+      title: '',
+      content: '',// html 格式博文内容
+      blogContent: '',// 需要传给后端的博文内容
+      mkdContent: '', // mkd 格式博文内容
       blogTags: [],
       isMarkdown: true,
       isCollapse: true,
@@ -197,42 +203,44 @@ export default {
     };
   },
   methods: {
-    collapse(key, keyPath) {
-      this.isCollapse = !this.isCollapse;
+    collapse (key, keyPath) {
+      this.isCollapse = !this.isCollapse
     },
-    switchMenu() {
-      this.isMarkdown = !this.isMarkdown;
+    switchMenu () {
+      this.isMarkdown = !this.isMarkdown
     },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+    handleOpen (key, keyPath) {
+      console.log(key, keyPath)
     },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
+    handleClose (key, keyPath) {
+      console.log(key, keyPath)
     },
-    changeData(value, render) {
+    mkdOnChange (value, render) {
       //value 是markdown格式文本, render是转换后的html格式文本
-      console.log("value:", value);
-      console.log("render:", render);
+      console.log("value:", value)
+      console.log("render:", render)
 
-      this.mkdContent = value;
-      this.blogContent = render;
+      this.mkdContent = value
+      this.blogContent = render
     },
-    onEditorBlur(editor) {
+    onEditorBlur (editor) {
       //失去焦点事件
     },
-    onEditorFocus(editor) {
+    onEditorFocus (editor) {
       //获得焦点事件
     },
-    onEditorChange({ editor, html, text }) {
+    onEditorChange ({ editor, html, text }) {
       //编辑器文本发生变化
       //this.content可以实时获取到当前编辑器内的文本内容
-      console.log("html", this.html);
-      console.log("text", this.text);
-      console.log("content", this.content);
+      // console.log("html", this.html)
+      // console.log("text", this.text)
+      console.log("content", this.content)
+      this.blogContent = this.content
+      console.log("blogContent ------- ", this.blogContent)
     },
-    upload() {
-      console.log("content: ", this.content);
-      console.log("blogContent: ", this.blogContent);
+    upload () {
+      console.log("content: ", this.content)
+      console.log("blogContent: ", this.blogContent)
       http
         .post("http://localhost/api/blog/saveBlog", {
           blogContent: this.blogContent,
@@ -241,26 +249,26 @@ export default {
           tags: this.blogTags
         })
         .then(data => {
-          console.log("res: ", data);
+          console.log("res: ", data)
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err))
     },
-    $imgAdd(pos, $file) {
+    $imgAdd (pos, $file) {
       // 第一步.将图片上传到服务器.
-      var formdata = new FormData();
-      formdata.append("file", $file);
-      var $vm = this.$refs.md;
-      console.log("$vm: ", $vm);
+      var formdata = new FormData()
+      formdata.append("file", $file)
+      var $vm = this.$refs.md
+      console.log("$vm: ", $vm)
 
       http
         .postFile("http://localhost/api/blog/upload", formdata)
         .then(data => {
-          console.log("res: ", data.data);
-          $vm.$img2Url(pos, data.data);
+          console.log("res: ", data.data)
+          $vm.$img2Url(pos, data.data)
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err))
     },
-    updateTags(tags) {
+    updateTags (tags) {
       this.blogTags = tags;
     }
   },
@@ -270,9 +278,9 @@ export default {
   created() {
     this.editorOption.modules.syntax = {
       highlight: text => hljs.highlightAuto(text).value
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped>

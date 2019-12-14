@@ -69,13 +69,13 @@ import http from "@/common/http";
 export default {
   data() {
     return {
-      content: "",
+      content: '',
       blogCommentCount: 0,
-      blogId: "",
+      blogId: '',
       blogLikeCount: 0,
-      blogTitle: "",
+      blogTitle: '',
       blogViews: 0,
-      blogTime: "",
+      blogTime: '',
       items: []
     };
   },
@@ -99,7 +99,7 @@ export default {
   created: function() {
     http
       .post("http://localhost/api/blog/show", {
-        blogId: "blog1561047648304"
+        blogId: "blog1576344017310"
       })
       .then(data => {
         console.log("res: ", data);
@@ -115,7 +115,7 @@ export default {
         this.blogTime = blog.createTime;
 
         for (let i = 0; i < tagArr.length; i++) {
-          this.items.push({ type: "", label: tagArr[i] });
+          this.items.push({ type: '', label: tagArr[i] });
         }
       })
       .catch(err => console.log(err));
